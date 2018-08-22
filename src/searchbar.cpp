@@ -33,14 +33,18 @@ void SearchBar::updateCompletion(const QString &text)
     }
     auto qurl = currentWidget->url();
     m_currentHost = qurl.host();
+    qInfo() << "Get reader for " << m_currentHost;
     auto reader = KiwixApp::instance()->getLibrary()->getReader(m_currentHost);
     if (!reader) {
+        qInfo() << "No reader";
         m_completionModel.setStringList(wordList);
         return;
     }
+    qInfo() << "Get suggestions for" << text;
     reader->searchSuggestionsSmart(text.toStdString(), 15);
     std::string title, url;
     while (reader->getNextSuggestion(title, url)) {
+        qInfo() << "Have suggestion " << QString::fromStdString(title) << "&" << QString::fromStdString(title);
         wordList << QString::fromStdString(title);
         m_urlList.push_back(url);
     }
