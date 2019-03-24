@@ -31,16 +31,16 @@ script:
   - mkdir -p ../bin
   - cp ninja ../bin
   - cd ..
-  # Build kiwix-lib
-  - git clone https://github.com/kiwix/kiwix-lib
-  - cd kiwix-lib/
+  # Build libzim
+  - git clone https://github.com/openzim/libzim
+  - cd libzim/
   - meson . build
   - ninja -C build
   - ninja -C build install
   - cd ..
-  # Build libzim
-  - git clone https://github.com/openzim/libzim
-  - cd libzim/
+  # Build kiwix-lib
+  - git clone https://github.com/kiwix/kiwix-lib
+  - cd kiwix-lib/
   - meson . build
   - ninja -C build
   - ninja -C build install
