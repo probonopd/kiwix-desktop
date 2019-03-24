@@ -8,7 +8,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get -y install qt59base libicu-dev libzim-dev libpugixml-dev aria2 libaria2 python3.4-venv
+  - sudo apt-get -y install qt59base qt59webengine qt59svg qt59imageformats libicu-dev libzim-dev libpugixml-dev aria2 libaria2 python3.4-venv
   - source /opt/qt*/bin/qt*-env.sh
 
 script:
