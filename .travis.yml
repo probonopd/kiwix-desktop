@@ -21,7 +21,7 @@ script:
   # Install Meson "manually"
   - virtualenv -p python3 ./ # Create virtualenv
   - source bin/activate      # Activate the virtualenv
-  - pip3 install meson       # Install Meson
+  - pip3 install meson==0.44.1 # Install Meson, 0.44.1 is the last that runs on Python 3.4 which is the latest on trusty
   - hash -r                  # Refresh bash paths
   # Install Ninja "manually"
   - git clone git://github.com/ninja-build/ninja.git
