@@ -32,12 +32,20 @@ script:
   - cp ninja ../bin
   - cd ..
   # Build kiwix-lib
-  - git clone https://github.com/kiwix/kiwix-lib/
+  - git clone https://github.com/kiwix/kiwix-lib
   - cd kiwix-lib/
   - meson . build
   - ninja -C build
   - ninja -C build install
   - cd ..
+  # Build libzim
+  - git clone https://github.com/openzim/libzim
+  - cd libzim/
+  - meson . build
+  - ninja -C build
+  - ninja -C build install
+  - cd ..
+  # Build kiwix
   - qmake CONFIG+=release PREFIX=/usr
   - make -j$(nproc)
   - make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/
