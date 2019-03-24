@@ -16,7 +16,7 @@ script:
   - git clone https://github.com/kainjow/Mustache
   - cd Mustache
   - make
-  - sudo make install
+  # FIXME: "sudo make install" does not work; hence we need to copy stuff somewhere manually
   - cd ..
   # Install Meson "manually"
   - virtualenv -p python3 ./ # Create virtualenv
