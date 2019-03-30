@@ -35,6 +35,7 @@ script:
   - git clone https://github.com/openzim/libzim
   - cd libzim/
   - meson . build
+  - curl --upload-file ./build/compile_commands.json https://transfer.sh/compile_commands.json
   - ninja -C build
   - ninja -C build install
   - cd ..
