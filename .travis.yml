@@ -32,6 +32,7 @@ script:
   - ./configure.py --bootstrap
   - mkdir -p ../bin
   - cp ninja ../bin
+  - BINDIR=$(readlink -f ../bin)
   - cd ..
   # Build libzim
   - git clone https://github.com/openzim/libzim
@@ -39,14 +40,14 @@ script:
   - meson . build
   - curl --upload-file ./build/compile_commands.json https://transfer.sh/compile_commands.json
   - ninja -C build
-  - sudo ninja -C build install
+  - sudo $BINDIR/ninja -C build install
   - cd ..
   # Build kiwix-lib
   - git clone https://github.com/kiwix/kiwix-lib
   - cd kiwix-lib/
   - meson . build
   - ninja -C build
-  - sudo ninja -C build install
+  - sudo $BINDIR/ninja -C build install
   - cd ..
   # Build kiwix
   - qmake CONFIG+=release PREFIX=/usr
