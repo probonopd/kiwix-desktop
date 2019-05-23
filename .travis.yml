@@ -39,14 +39,14 @@ script:
   - meson . build
   - curl --upload-file ./build/compile_commands.json https://transfer.sh/compile_commands.json
   - ninja -C build
-  - ninja -C build install
+  - sudo ninja -C build install
   - cd ..
   # Build kiwix-lib
   - git clone https://github.com/kiwix/kiwix-lib
   - cd kiwix-lib/
   - meson . build
   - ninja -C build
-  - ninja -C build install
+  - sudo ninja -C build install
   - cd ..
   # Build kiwix
   - qmake CONFIG+=release PREFIX=/usr
