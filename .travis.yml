@@ -25,6 +25,7 @@ script:
   - git clone https://github.com/kainjow/Mustache
   - cd Mustache
   - make -j$(nproc)
+  - cp *.hpp /usr/share/include/ # Undocumented workaround for https://github.com/kainjow/Mustache/issues/33?
   # FIXME: "sudo make install" does not work; hence we need to copy stuff somewhere manually
   - cd ..
   # Install Meson "manually"
