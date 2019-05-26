@@ -53,6 +53,7 @@ script:
   # Build kiwix-lib
   - git clone https://github.com/kiwix/kiwix-lib
   - cd kiwix-lib/
+  - cp ../Mustache/*.hpp . # Where does this need to go? https://github.com/kiwix/kiwix-lib/issues/201
   - meson . build
   - ninja -C build
   - sudo $BINDIR/ninja -C build install
