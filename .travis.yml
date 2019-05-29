@@ -53,7 +53,7 @@ script:
   # Build kiwix-lib
   - git clone https://github.com/kiwix/kiwix-lib
   - cd kiwix-lib/
-  - meson . build
+  - meson . build --prefix /usr
   - ninja -C build
   - sudo $BINDIR/ninja -C build install
   - cd ..
