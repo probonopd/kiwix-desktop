@@ -10,7 +10,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get -y install zlib1g-dev libxapian-dev lzma-dev qt59base qt59webengine qt59svg qt59imageformats libicu-dev libpugixml-dev aria2 libaria2v5 python3.6-venv
+  - sudo apt-get -y install zlibgl1-mesa-dev lib1g-dev libxapian-dev lzma-dev qt59base qt59webengine qt59svg qt59imageformats libicu-dev libpugixml-dev aria2 libaria2v5 python3.6-venv
   - source /opt/qt*/bin/qt*-env.sh
 
 script:
