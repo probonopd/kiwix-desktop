@@ -61,11 +61,17 @@ script:
   - qmake CONFIG+=release PREFIX=/usr
   - make -j$(nproc)
   - make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/
-  - cat /home/travis/build/probonopd/kiwix-desktop/kiwix-lib/build/meson-logs/meson-log.* # https://github.com/kiwix/kiwix-lib/issues/201#issuecomment-496110765
+  # cat /home/travis/build/probonopd/kiwix-desktop/kiwix-lib/build/meson-logs/meson-log.* # https://github.com/kiwix/kiwix-lib/issues/201#issuecomment-496110765
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
   - unset QTDIR; unset QT_PLUGIN_PATH ; unset LD_LIBRARY_PATH
   # export VERSION=... # linuxdeployqt uses this for naming the file
+  - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -bundle-non-qt-libs
+  # Trying a workaround for: nss_util.cc nss_error=-5925
+  # https://github.com/probonopd/linuxdeployqt/issues/35#issuecomment-429400727
+  # https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Tech_Notes/nss_tech_note6
+  - ( export LD_LIBRARY_PATH=$(readlink -f appdir/usr/lib/) && shlibsign -v -i libsoftokn3.so )
+  - find . -name '*.chk'  
   - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage
 
 after_success:
