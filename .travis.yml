@@ -10,7 +10,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get -y install libnss3-tools libgl1-mesa-dev zlib1g-dev libxapian-dev lzma-dev qt59base qt59webengine qt59svg qt59imageformats libicu-dev libpugixml-dev aria2 libaria2v5 python3.6-venv
+  - sudo apt-get -y install aria2 libnss3-tools libgl1-mesa-dev zlib1g-dev libxapian-dev lzma-dev qt59base qt59webengine qt59svg qt59imageformats libicu-dev libpugixml-dev aria2 libaria2v5 python3.6-venv
   - source /opt/qt*/bin/qt*-env.sh
 
 script:
@@ -61,6 +61,7 @@ script:
   - qmake CONFIG+=release PREFIX=/usr
   - make -j$(nproc)
   - make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/
+  - mkdir -p appdir/usr/bin/ && cp $(which aria2c) ./appdir/usr/bin/
   # cat /home/travis/build/probonopd/kiwix-desktop/kiwix-lib/build/meson-logs/meson-log.* # https://github.com/kiwix/kiwix-lib/issues/201#issuecomment-496110765
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
@@ -73,7 +74,7 @@ script:
   - find appdir/
   - ( export LD_LIBRARY_PATH=$(readlink -f appdir/usr/lib/) && shlibsign -v -i libsoftokn3.so )
   - find . -name '*.chk'  
-  - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage
+  - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage -executable=./appdir/usr/bin/aria2c
 
 after_success:
   # find appdir -executable -type f -exec ldd {} \; | grep " => /usr" | cut -d " " -f 2-3 | sort | uniq # for debugging
