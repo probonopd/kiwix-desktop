@@ -72,8 +72,8 @@ script:
   # https://github.com/probonopd/linuxdeployqt/issues/35#issuecomment-429400727
   # https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/NSS_Tech_Notes/nss_tech_note6
   - find appdir/
-  - ( export LD_LIBRARY_PATH=$(readlink -f appdir/usr/lib/) && shlibsign -v -i libsoftokn3.so )
-  - find . -name '*.chk'  
+  # ( export LD_LIBRARY_PATH=$(readlink -f appdir/usr/lib/) && shlibsign -v -i libsoftokn3.so )
+  # find . -name '*.chk'  
   - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage -executable=./appdir/usr/bin/aria2c
 
 after_success:
